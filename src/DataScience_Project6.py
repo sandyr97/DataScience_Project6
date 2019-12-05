@@ -21,23 +21,7 @@ fig = plt.figure()
 ax = fig.add_subplot(111)
 ax.set_xticklabels(df['timestamp'], rotation=70)
 ax.plot_date(x=df.timestamp, y=df.value, ls='-', marker='.')
-import sklearn as sc
-from sklearn.model_selection import train_test_split
-labels = df['value']
-features = df[['timestamp']]
-X_train, X_test, y_train, y_test = train_test_split(features,
-                                                    labels,
-                                                    test_size=0.20,
-                                                    random_state=42)
-from sklearn.ensemble import IsolationForest
 
-model = IsolationForest()
-model.fit(X_train, y_train)
-#Predicting the label of the new data set
-y_pred = model.predict(X_test)
-print (y_pred)
-from sklearn.metrics import accuracy_score
-accuracy_score(y_test, y_pred)
 import seaborn as sns
 sns.distplot(df['value'])
 plt.title("Distribution of Values")
